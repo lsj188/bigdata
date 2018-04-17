@@ -1,4 +1,4 @@
-package org.apache.spark.streaming.kafka
+package streaming.kafka
 
 import kafka.common.TopicAndPartition
 import kafka.message.MessageAndMetadata
@@ -7,6 +7,7 @@ import org.apache.spark.SparkException
 import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream.InputDStream
+import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaUtils}
 
 import scala.collection.immutable.HashMap
 import scala.reflect.ClassTag

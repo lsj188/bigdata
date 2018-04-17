@@ -1,4 +1,4 @@
-package org.apache.spark.streaming.kafka
+package streaming.kafka
 
 /**
  * Created by lsj on 2017/11/2.

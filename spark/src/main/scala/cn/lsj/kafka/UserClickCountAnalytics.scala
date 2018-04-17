@@ -1,11 +1,12 @@
 package cn.lsj.kafka
 
+import cn.lsj.redis.RedisClient
 import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
-import org.apache.spark.streaming.kafka.KafkaManager
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.json.JSONObject
-import cn.lsj.redis._
+import streaming.kafka.KafkaManager
+
 import scala.collection.JavaConversions._
 import scala.collection.immutable.HashMap
 
