@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>comm</artifactId>
+        <groupId>cn.lsj.bigdata</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../comm/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.lsj.bigdata</groupId>
+    <artifactId>spark</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <inceptionYear>2008</inceptionYear>
+    <modules>
+        <module>../flink</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <artifactId>comm</artifactId>
+            <groupId>cn.lsj.bigdata</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <artifactId>hdfs</artifactId>
+            <groupId>cn.lsj.bigdata</groupId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--spark start-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>${hive.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-yarn_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.apache.spark</groupId>-->
+        <!--&lt;!&ndash;需要插件版本需看文档&ndash;&gt;-->
+        <!--&lt;!&ndash;文档：http://spark.apache.org/docs/latest/streaming-programming-guide.html&ndash;&gt;-->
+        <!--<artifactId>spark-streaming-kafka-0-8_2.11</artifactId>-->
+        <!--<version>${spark.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka_2.11</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+        <!--spark end-->
+
+        <!--redis start-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <!--redis end-->
+
+
+    </dependencies>
+</project>

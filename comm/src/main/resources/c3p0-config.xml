@@ -1,0 +1,123 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<c3p0-config>
+    <!--默认配置-->
+    <default-config>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxStatements">200</property>
+    </default-config>
+
+    <!--配置连接池mysql-->
+    <named-config name="mysql">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/mysql</property>
+        <property name="user">root</property>
+        <property name="password">lsj123</property>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxStatements">200</property>
+    </named-config>
+
+    <!--配置连接池hive-->
+    <named-config name="hive">
+        <property name="driverClass">org.apache.hive.jdbc.HiveDriver</property>
+        <property name="jdbcUrl">jdbc:hive2://192.168.133.128:10000/</property>
+        <property name="user">hive</property>
+        <property name="password"></property>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxStatements">200</property>
+    </named-config>
+
+    <!--配置连接池2-->
+    ......
+    <!--配置连接池3-->
+    ......
+    <!--配置连接池4-->
+    ......
+    <!--==========================================================================================-->
+    <!--&lt;!&ndash;acquireIncrement：链接用完了自动增量3个。 &ndash;&gt;-->
+    <!--<property name="acquireIncrement">3</property>-->
+
+    <!--&lt;!&ndash;acquireRetryAttempts：链接失败后重新试30次。&ndash;&gt;-->
+    <!--<property name="acquireRetryAttempts">30</property>-->
+
+    <!--&lt;!&ndash;acquireRetryDelay；两次连接中间隔1000毫秒。 &ndash;&gt;-->
+    <!--<property name="acquireRetryDelay">1000</property>-->
+
+    <!--&lt;!&ndash;autoCommitOnClose：连接关闭时默认将所有未提交的操作回滚。 &ndash;&gt;-->
+    <!--<property name="autoCommitOnClose">false</property>-->
+
+    <!--&lt;!&ndash;automaticTestTable：c3p0测试表，没什么用。&ndash;&gt;-->
+    <!--<property name="automaticTestTable">Test</property>-->
+
+    <!--&lt;!&ndash;breakAfterAcquireFailure：出错时不把正在提交的数据抛弃。&ndash;&gt;-->
+    <!--<property name="breakAfterAcquireFailure">false</property>-->
+
+    <!--&lt;!&ndash;checkoutTimeout：100毫秒后如果sql数据没有执行完将会报错，如果设置成0，那么将会无限的等待。 &ndash;&gt;-->
+    <!--<property name="checkoutTimeout">100</property>-->
+
+    <!--&lt;!&ndash;connectionTesterClassName：通过实现ConnectionTester或QueryConnectionTester的类来测试连接。类名需制定全路径。Default: com.mchange.v2.c3p0.impl.DefaultConnectionTester&ndash;&gt;-->
+    <!--<property name="connectionTesterClassName"></property>-->
+
+    <!--&lt;!&ndash;factoryClassLocation：指定c3p0 libraries的路径，如果（通常都是这样）在本地即可获得那么无需设置，默认null即可。&ndash;&gt;-->
+    <!--<property name="factoryClassLocation">null</property>-->
+
+    <!--&lt;!&ndash;forceIgnoreUnresolvedTransactions：作者强烈建议不使用的一个属性。&ndash;&gt;-->
+    <!--<property name="forceIgnoreUnresolvedTransactions">false</property>-->
+
+    <!--&lt;!&ndash;idleConnectionTestPeriod：每60秒检查所有连接池中的空闲连接。&ndash;&gt;-->
+    <!--<property name="idleConnectionTestPeriod">60</property>-->
+
+    <!--&lt;!&ndash;initialPoolSize：初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。 &ndash;&gt;-->
+    <!--<property name="initialPoolSize">3</property>-->
+
+    <!--&lt;!&ndash;maxIdleTime：最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。&ndash;&gt;-->
+    <!--<property name="maxIdleTime">60</property>-->
+
+    <!--&lt;!&ndash;maxPoolSize：连接池中保留的最大连接数。 &ndash;&gt;-->
+    <!--<property name="maxPoolSize">15</property>-->
+
+    <!--&lt;!&ndash;maxStatements：最大链接数。&ndash;&gt;-->
+    <!--<property name="maxStatements">100</property>-->
+
+    <!--&lt;!&ndash;maxStatementsPerConnection：定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0  &ndash;&gt;-->
+    <!--<property name="maxStatementsPerConnection"></property>-->
+
+    <!--&lt;!&ndash;numHelperThreads：异步操作，提升性能通过多线程实现多个操作同时被执行。Default: 3&ndash;&gt;-->
+    <!--<property name="numHelperThreads">3</property>-->
+
+    <!--&lt;!&ndash;overrideDefaultUser：当用户调用getConnection()时使root用户成为去获取连接的用户。主要用于连接池连接非c3p0的数据源时。Default: null&ndash;&gt;-->
+    <!--<property name="overrideDefaultUser">root</property>-->
+
+    <!--&lt;!&ndash;overrideDefaultPassword：与overrideDefaultUser参数对应使用的一个参数。Default: null&ndash;&gt;-->
+    <!--<property name="overrideDefaultPassword">password</property>-->
+
+    <!--&lt;!&ndash;password：密码。Default: null&ndash;&gt;-->
+    <!--<property name="password"></property>-->
+
+    <!--&lt;!&ndash;preferredTestQuery：定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个一显著提高测试速度。注意： 测试的表必须在初始数据源的时候就存在。Default: null&ndash;&gt;-->
+    <!--<property name="preferredTestQuery">select id from test where id=1</property>-->
+
+    <!--&lt;!&ndash;propertyCycle：用户修改系统配置参数执行前最多等待300秒。Default: 300 &ndash;&gt;-->
+    <!--<property name="propertyCycle">300</property>-->
+
+    <!--&lt;!&ndash;testConnectionOnCheckout：因性能消耗大请只在需要的时候使用它。Default: false &ndash;&gt;-->
+    <!--<property name="testConnectionOnCheckout">false</property>-->
+
+    <!--&lt;!&ndash;testConnectionOnCheckin：如果设为true那么在取得连接的同时将校验连接的有效性。Default: false &ndash;&gt;-->
+    <!--<property name="testConnectionOnCheckin">true</property>-->
+
+    <!--&lt;!&ndash;user：用户名。Default: null&ndash;&gt;-->
+    <!--<property name="user">root</property>-->
+
+    <!--&lt;!&ndash;usesTraditionalReflectiveProxies：动态反射代理。Default: false&ndash;&gt;-->
+    <!--<property name="usesTraditionalReflectiveProxies">false</property>-->
+    <!--==========================================================================================-->
+</c3p0-config>
