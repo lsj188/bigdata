@@ -30,10 +30,14 @@ object Main {
         }
 
 
-        if (args {
-            0
-        }.equals("flink-WindowWC")) {
-            //        new WindowWC().run(hMap);
+        def run(name: String) {
+                name match {
+                    //从前往后匹配
+                    case "flink-wc" => println("11")
+                    case "Hadoop" => println("11")
+                    case _ => println("找不到匹配的类！")
+
+                }
         }
     }
 

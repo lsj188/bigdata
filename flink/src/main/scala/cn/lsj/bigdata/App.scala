@@ -4,6 +4,6 @@ package cn.lsj.bigdata
  * Hello world!
  *
  */
-object App extends Application {
+object App extends App{
   println( "Hello World!" )
 }
