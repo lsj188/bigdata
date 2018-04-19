@@ -6,6 +6,7 @@
 .idea/*
 target/*
 */target/*
+*timestamp
 testData/*
 out/*
 *.iml
