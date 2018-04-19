@@ -5,6 +5,7 @@
 .settings
 .idea/*
 target/*
+*/target/*
 testData/*
 out/*
 *.iml
