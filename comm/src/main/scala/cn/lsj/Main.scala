@@ -1,4 +1,4 @@
-package cn.lsj.tools
+package cn.lsj
 
 /** *
   * ./bin/flink run examples/streaming/SocketWindowWordCount.jar --main-class flink-WindowWC  --args host=localhost;port=9999

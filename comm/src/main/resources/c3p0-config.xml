@@ -25,7 +25,7 @@
     <!--配置连接池hive-->
     <named-config name="hive">
         <property name="driverClass">org.apache.hive.jdbc.HiveDriver</property>
-        <property name="jdbcUrl">jdbc:hive2://192.168.133.128:10000/</property>
+        <property name="jdbcUrl">jdbc:hive2://localhost:10000/</property>
         <property name="user">hive</property>
         <property name="password"></property>
         <property name="initialPoolSize">10</property>

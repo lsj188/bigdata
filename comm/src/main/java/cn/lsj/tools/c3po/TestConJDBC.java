@@ -16,10 +16,10 @@ public class TestConJDBC {
 //        tesconn.jdbcTest();
 //        tesconn.c3p0ConnQuery();
 //        tesconn.c3p0ConnBatch();
-//        tesconn.c3p0HiveConnQuery();
-        System.out.println(tesconn.dataSources.get("mysql"));
-        tesconn.dataSources.put("mysql", 1);
-        System.out.println(tesconn.dataSources.get("mysql"));
+        tesconn.c3p0HiveConnQuery();
+//        System.out.println(tesconn.dataSources.get("mysql"));
+//        tesconn.dataSources.put("mysql", 1);
+//        System.out.println(tesconn.dataSources.get("mysql"));
 
 
 
@@ -109,6 +109,8 @@ public class TestConJDBC {
             conn = DriverManager.getConnection(url);
             // Statement里面带有很多方法，比如executeUpdate可以实现插入，更新和删除等
             Statement stmt = conn.createStatement();
+            sql = "drop table if exists student ;";
+            int result1 = stmt.executeUpdate(sql);// executeUpdate语句会返回一个受影响的行数，如果返回-1就没有成功
             sql = "create table student(NO char(20),name varchar(20),primary key(NO))";
             int result = stmt.executeUpdate(sql);// executeUpdate语句会返回一个受影响的行数，如果返回-1就没有成功
             if (result != -1) {
