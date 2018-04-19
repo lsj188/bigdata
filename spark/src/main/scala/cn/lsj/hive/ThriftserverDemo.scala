@@ -12,12 +12,12 @@ object ThriftserverDemo {
         Class.forName(driver)
 
         //get connection
-        val (url, username, userpasswd) = ("jdbc:hive2://linux-hadoop3.ibeifeng.com:10000", "beifeng", "beifeng")
+        val (url, username, userpasswd) = ("jdbc:hive2://localhost:10000", "hive", "hive")
         val connection = DriverManager.getConnection(url, username, userpasswd)
 
         //get statement
-        connection.prepareStatement("use db_emp").execute()
-        val sql = "select * from dept d join emp e on d.deptno=e.deptno"
+        connection.prepareStatement("use lsj_test").execute()
+        val sql = "select * from test1"
         val statement = connection.prepareStatement(sql)
 
         //get result
