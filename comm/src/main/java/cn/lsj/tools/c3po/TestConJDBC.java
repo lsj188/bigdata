@@ -43,14 +43,14 @@ public class TestConJDBC {
         }
     }
     public void c3p0HiveConnQuery() {
-        String sql = "select * from info";
+        String sql = "select * from lsj_test.test1";
         DBUtil_BO dbBo = new DBUtil_BO();
         try {
             dbBo.conn = C3p0Utils.getConnection("hive");//取用一个连接
             dbBo.st = dbBo.conn.prepareStatement(sql);
             dbBo.rs = dbBo.st.executeQuery();
             while (dbBo.rs.next()) {
-                int id = dbBo.rs.getInt(1);
+                String id = dbBo.rs.getString(1);
                 String name = dbBo.rs.getString(2);
                 System.out.println("id: "+id+"\tname: "+name);
             }

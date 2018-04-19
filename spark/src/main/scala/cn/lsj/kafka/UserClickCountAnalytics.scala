@@ -5,7 +5,7 @@ import kafka.serializer.StringDecoder
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.json.JSONObject
-import streaming.kafka.KafkaManager
+import org.apache.spark.kafka.KafkaManager
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable.HashMap

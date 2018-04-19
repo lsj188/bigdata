@@ -1,4 +1,4 @@
-package streaming.kafka
+package org.apache.spark.kafka
 
 import kafka.common.TopicAndPartition
 import kafka.message.MessageAndMetadata
@@ -11,7 +11,7 @@ import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaUtils}
 
 import scala.collection.immutable.HashMap
 import scala.reflect.ClassTag
-
+import org.apache.spark.streaming.kafka.KafkaCluster
 /**
  * 增读取数据标记位，使客户端读取数据不丢失
  **/
