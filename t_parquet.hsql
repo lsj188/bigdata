@@ -1,0 +1,15 @@
+drop table t_snappy_parquet;
+create table t_snappy_parquet(
+type         string,
+level        string,
+title        string,
+url          string,
+image_path   string,
+image_url    string,
+student      string,
+introduction string
+) partitioned by(in_time string)
+row format delimited 
+fields terminated by '\t'
+lines terminated by '\n'
+STORED AS PARQUET;

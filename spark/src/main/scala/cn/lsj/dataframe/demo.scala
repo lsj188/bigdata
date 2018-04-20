@@ -22,11 +22,11 @@ object demo {
         //    sql2 //以编程方式定义RDD Schema。
         //    demofile2parquet() //文本文件转为parquet文件
         //    readParquet() //读取parquet文件
-        //    partParquet() //分区表
+            partParquet() //分区表
         //    hivesql()     //执行hive sql
         //    useJson()
         //    useFunctions()
-        useJDBC()
+//        useJDBC()
     }
 
     /**
