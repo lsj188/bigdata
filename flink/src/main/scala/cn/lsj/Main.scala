@@ -1,9 +1,9 @@
 package cn.lsj
 
-import cn.lsj.demo.WindowWC
+import cn.lsj.demo.{TableAndSql, WindowWC}
 
 /** *
-  * ./bin/flink run examples/streaming/SocketWindowWordCount.jar --main-class flink-WindowWC  --args host=localhost;port=9999
+  * ./bin/flink run examples/streaming/SocketWindowWordCount.jar WindowWC host=localhost;port=9999
   * 入口主类
   */
 object Main {
@@ -41,6 +41,7 @@ object Main {
             name match {
                 //从前往后匹配
                 case "WindowWC" => new WindowWC().run(argsMap)
+                case "TableAndSql" => new TableAndSql().csvTabSource(argsMap)
                 case _ => println("找不到匹配的类！")
 
             }
