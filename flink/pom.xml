@@ -44,5 +44,12 @@
             <version>${flink.version}</version>
         </dependency>
         <!--flink end-->
+        <!--hadoop start-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+        <!--hadoop end-->
     </dependencies>
 </project>

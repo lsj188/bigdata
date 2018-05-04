@@ -3,7 +3,7 @@ package cn.lsj
 import cn.lsj.demo.{TableAndSql, WindowWC}
 
 /** *
-  * ./bin/flink run examples/streaming/SocketWindowWordCount.jar WindowWC host=localhost;port=9999
+  * .\bin\flink run -d -c cn.lsj.Main E:\git\cn.lsj.bigdata\flink\target\flink-1.0-SNAPSHOT.jar WindowWC "host=localhost;port=9999"
   * 入口主类
   */
 object Main {
