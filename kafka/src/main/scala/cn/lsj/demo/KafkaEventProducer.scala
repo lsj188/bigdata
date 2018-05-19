@@ -41,7 +41,8 @@ object KafkaEventProducer {
     // bin/kafka-topics.sh --zookeeper zk1:2181,zk2:2181,zk3:2181/kafka --describe user_events
     // bin/kafka-console-consumer.sh --zookeeper zk1:2181,zk2:2181,zk3:22181/kafka --topic test_json_basis_event --from-beginning
     def main(args: Array[String]): Unit = {
-        val topic = "user_events"
+//        val topic = "user_events"
+        val topic = "streams-plaintext-input"
         val brokers = "127.0.0.1:9092"
         val props = new Properties()
         props.put("metadata.broker.list", brokers)
@@ -61,10 +62,12 @@ object KafkaEventProducer {
               .put("click_count", click)
 
 
+            val line=getUserID+" "+" "+click+" "+System.currentTimeMillis.toString
             // produce event message
 
-            producer.send(new KeyedMessage[String, String](topic, event.toString))
-            println("Message sent: " + event)
+//            producer.send(new KeyedMessage[String, String](topic, event.toString))
+            producer.send(new KeyedMessage[String, String](topic,line ))
+            println("Message sent: " + line)
 
 
             Thread.sleep(2000)

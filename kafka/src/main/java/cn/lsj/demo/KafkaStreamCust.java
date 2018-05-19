@@ -1,34 +1,39 @@
 package cn.lsj.demo;
 
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.KeyValue;
-import org.apache.kafka.streams.StreamsBuilder;
+import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.KeyValueMapper;
 import org.apache.kafka.streams.kstream.Produced;
-import org.apache.kafka.streams.state.KeyValueStore;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.apache.kafka.streams.kstream.ValueMapper;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+
 
 public class KafkaStreamCust {
 
     public static void main(final String[] args) throws Exception {
         Properties config = new Properties();
         config.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application-pip");
-        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        // 指定一个路径创建改应用ID所属的文件
+        config.put(StreamsConfig.STATE_DIR_CONFIG, "E:\\bigdata_install\\kafka_2.11-0.11.0.1\\kafka-stream");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 
-        StreamsBuilder builder = new StreamsBuilder();
+        KStreamBuilder builder = new KStreamBuilder();
         KStream<String, String> textLines = builder.stream("user_events");
         textLines.print();
+        KTable<String, Long> wordCounts = textLines.flatMapValues(value -> Arrays.asList(value.toLowerCase(Locale.getDefault()).split(" "))
+        ).groupBy((k, v) -> v)
+                .count();
 //        KTable<String, Integer> wordCounts = textLines.map((k, v) -> {
 //            JSONObject json = null;
 //            String kr = null;
@@ -43,7 +48,8 @@ public class KafkaStreamCust {
 //            }
 //            return KeyValue.pair(kr, vr);
 //        }).groupByKey().reduce((a, b) -> a + b);
-//        wordCounts.print();
+        System.out.println("KafkaStreamCust:==========================================================");
+        wordCounts.print();
 //
 ////
 ////                .flatMapValues(textLine -> Arrays.asList(textLine.toLowerCase().split("\\W+")))
@@ -51,8 +57,25 @@ public class KafkaStreamCust {
 ////                .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("counts-store"));
 //        wordCounts.toStream().to("uid_click_count", Produced.with(Serdes.String(), Serdes.Integer()));
 
-        KafkaStreams streams = new KafkaStreams(builder.build(), config);
-        streams.start();
+        KafkaStreams streams = new KafkaStreams(builder, config);
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        // attach shutdown handler to catch control-c
+        Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook") {
+            @Override
+            public void run() {
+                streams.close();
+                latch.countDown();
+            }
+        });
+
+        try {
+            streams.start();
+            latch.await();
+        } catch (Throwable e) {
+            System.exit(1);
+        }
+        System.exit(0);
     }
 
 }
