@@ -1,15 +1,11 @@
 package cn.lsj.demo;
 
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.kstream.KStreamBuilder;
+import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.KeyValueMapper;
-import org.apache.kafka.streams.kstream.Produced;
-import org.apache.kafka.streams.kstream.ValueMapper;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -28,7 +24,7 @@ public class KafkaStreamCust {
         config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 
-        KStreamBuilder builder = new KStreamBuilder();
+        StreamsBuilder builder = new StreamsBuilder();
         KStream<String, String> textLines = builder.stream("user_events");
         textLines.print();
         KTable<String, Long> wordCounts = textLines.flatMapValues(value -> Arrays.asList(value.toLowerCase(Locale.getDefault()).split(" "))
@@ -57,7 +53,7 @@ public class KafkaStreamCust {
 ////                .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("counts-store"));
 //        wordCounts.toStream().to("uid_click_count", Produced.with(Serdes.String(), Serdes.Integer()));
 
-        KafkaStreams streams = new KafkaStreams(builder, config);
+        KafkaStreams streams = new KafkaStreams(builder.build(), config);
         final CountDownLatch latch = new CountDownLatch(1);
 
         // attach shutdown handler to catch control-c

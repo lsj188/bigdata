@@ -23,17 +23,17 @@ object KafkaStreamsCustPip {
         val builder: StreamsBuilder = new StreamsBuilder()
         val textLines: KStream[String, String] = builder.stream("user_events")
         textLines.print()
-        val wordCounts: KTable[String, Long] = textLines.map[String, Long] {
+        val wordCounts: KTable[String, String] = textLines.map[String, String] {
             //kafka有些不支持scala语法，需要按JAVA来写，注意看编译错误信息
-            new KeyValueMapper[String, String, KeyValue[String, Long]] {
-                override def apply(k: String, v: String): KeyValue[String, Long] = {
+            new KeyValueMapper[String, String, KeyValue[String, String]] {
+                override def apply(k: String, v: String): KeyValue[String, String] = {
                     val json: JSONObject = new JSONObject(v)
-                    return KeyValue.pair(json.getString("uid"), json.getLong("click_count"))
+                    return KeyValue.pair(json.getString("uid"), json.getString("click_count"))
                 }
             }
-        }.groupByKey().reduce(new Reducer[Long] {
+        }.groupByKey().reduce(new Reducer[String] {
             //kafka有些不支持scala语法，需要按JAVA来写，注意看编译错误信息
-            override def apply(aggValue: Long, newValue: Long): Long = aggValue + newValue
+            override def apply(aggValue: String, newValue: String): String = (aggValue.toLong+newValue.toLong).toString
         })
 
         wordCounts.toStream().to("user_events_pip")
