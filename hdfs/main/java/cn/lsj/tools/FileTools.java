@@ -21,6 +21,15 @@ import org.apache.hadoop.fs.RemoteIterator;
 
 public class FileTools {
     static Configuration conf = new Configuration();
+	//集群主备连接方式
+	//conf.set("fs.defaultFS", "hdfs://testcluster"); 
+    //conf.set("dfs.nameservices","testcluster"); //假设nameservices命名为testcluster
+    //conf.set("dfs.ha.namenodes.testcluster","nn1,nn2");
+    //conf.set("dfs.namenode.rpc-address.testcluster.nn1","192.168.**.**:8020");
+    //conf.set("dfs.namenode.rpc-address.testcluster.nn2","192.168.**.**:8020");
+    //conf.set("dfs.client.failover.proxy.provider.testcluster","org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider");
+    //FileSystem fs = FileSystem.get(conf);
+
 
     public static void delPath(String tempOutputPath) throws IOException {
 
